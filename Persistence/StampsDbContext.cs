@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Stamps.Models;
 
 namespace Stamps.Persistence
 {
@@ -9,5 +10,7 @@ namespace Stamps.Persistence
         {
             
         }
+
+        public DbSet<Continent> Continents { get; set; }
     }
 }
