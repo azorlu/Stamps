@@ -8,9 +8,15 @@ namespace Stamps.Mapping
     {
         public MappingProfile()
         {
+            // Domain to API Resource
             CreateMap<Continent, ContinentResource>();
             CreateMap<Country, CountryResource>();
             CreateMap<Category, CategoryResource>();
+            CreateMap<Stamp, StampResource>();
+
+            // API Resourec to Domain
+            CreateMap<StampResource, Stamp>()
+              .ForMember(s => s.LastUpdate, opt => opt.Ignore());
         }
     }
 }

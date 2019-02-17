@@ -11,13 +11,16 @@ export class StampFormComponent implements OnInit {
   continents;
   countries;
   categories;
+  currentYear:number;
   stamp: any= {};
   
   constructor(private stampService: StampService) { 
-
+      
     }
 
   ngOnInit() {
+    this.currentYear = new Date().getFullYear();
+    
     this.stampService.getContinents()
       .subscribe(continents => {
         this.continents = continents;
@@ -30,7 +33,6 @@ export class StampFormComponent implements OnInit {
   }
 
   onContinentChange() {
-    //console.log("Stamp", this.stamp);
     var selectedContinent = this.continents.find(c => c.id == this.stamp.continent);
     this.countries = selectedContinent ? selectedContinent.countries : [];
   }
