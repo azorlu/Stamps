@@ -10,6 +10,7 @@ namespace Stamps.Mapping
         {
             CreateMap<Continent, ContinentResource>();
             CreateMap<Country, CountryResource>();
+            CreateMap<Category, CategoryResource>();
         }
     }
 }

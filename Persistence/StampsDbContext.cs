@@ -12,5 +12,8 @@ namespace Stamps.Persistence
         }
 
         public DbSet<Continent> Continents { get; set; }
+        // Adding Country DbSet is not necessary
+
+        public DbSet<Category> Categories { get; set; }
     }
 }
