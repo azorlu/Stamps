@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ContinentService } from './continent.service';
+import { StampService } from './stamp.service';
 
-describe('ContinentService', () => {
+describe('StampService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ContinentService = TestBed.get(ContinentService);
+    const service: StampService = TestBed.get(StampService);
     expect(service).toBeTruthy();
   });
 });

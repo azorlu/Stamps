@@ -1,4 +1,4 @@
-import { ContinentService } from './../services/continent.service';
+import { StampService } from '../services/stamp.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,15 +10,22 @@ export class StampFormComponent implements OnInit {
 
   continents;
   countries;
+  categories;
   stamp: any= {};
   
-  constructor(private continentService: ContinentService) { }
+  constructor(private stampService: StampService) { 
+
+    }
 
   ngOnInit() {
-    this.continentService.getContinents()
+    this.stampService.getContinents()
       .subscribe(continents => {
         this.continents = continents;
-        console.log("CONTINENTS", this.continents);
+      });
+
+      this.stampService.getCategories()
+      .subscribe(categories => {
+        this.categories = categories;
       });
   }
 

@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +12,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { StampFormComponent } from './stamp-form/stamp-form.component';
 
-import { ContinentService } from './services/continent.service';
+import { StampService } from './services/stamp.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ContinentService } from './services/continent.service';
       { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [ContinentService],
+  providers: [StampService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
