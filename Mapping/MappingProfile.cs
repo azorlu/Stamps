@@ -16,7 +16,8 @@ namespace Stamps.Mapping
 
             // API Resourec to Domain
             CreateMap<StampResource, Stamp>()
-              .ForMember(s => s.LastUpdate, opt => opt.Ignore());
+            .ForMember(s => s.Id, opt => opt.Ignore())
+            .ForMember(s => s.LastUpdate, opt => opt.Ignore());
         }
     }
 }

@@ -6,7 +6,8 @@ namespace Stamps.Persistence
     public class StampsDbContext : DbContext
     {
         public DbSet<Continent> Continents { get; set; }
-        // Adding Country DbSet is not necessary
+        
+        public DbSet<Country> Countries { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
