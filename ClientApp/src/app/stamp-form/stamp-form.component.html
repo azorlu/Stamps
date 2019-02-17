@@ -1,3 +1,19 @@
-<p>
-  stamp-form works!
-</p>
+<h1>
+  New Stamp
+</h1>
+<form>
+  <div class="form-group">
+    <label for="continent">Continent</label>
+    <select id="continent" class="form-control" (change)="onContinentChange()" [(ngModel)]="stamp.continent" name="continent">
+      <option value=""></option>
+      <option *ngFor="let c of continents" value="{{ c.id }}">{{ c.name }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="country">Country</label>
+    <select id="country" class="form-control">
+      <option value=""></option>
+      <option *ngFor="let c of countries" value="{{ c.id }}">{{ c.name }}</option>
+    </select>
+  </div>
+</form>
