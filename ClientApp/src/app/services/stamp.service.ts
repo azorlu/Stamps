@@ -15,4 +15,8 @@ export class StampService {
   getCategories() {
     return this.httpClient.get('/api/categories');
   }
+
+  create(stamp) {
+    return this.httpClient.post('/api/stamps', stamp);
+  }
 }

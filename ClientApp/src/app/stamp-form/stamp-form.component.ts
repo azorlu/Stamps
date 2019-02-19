@@ -12,6 +12,8 @@ export class StampFormComponent implements OnInit {
   countries;
   categories;
   currentYear:number;
+  title:string;
+  description:string;
   stamp: any= {};
   
   constructor(private stampService: StampService) { 
@@ -33,8 +35,18 @@ export class StampFormComponent implements OnInit {
   }
 
   onContinentChange() {
-    var selectedContinent = this.continents.find(c => c.id == this.stamp.continent);
+    var selectedContinent = this.continents.find(c => c.id == this.stamp.continentId);
     this.countries = selectedContinent ? selectedContinent.countries : [];
+    delete this.stamp.countryId;
+  }
+
+  onCategoryChange(c) {
+    this.stamp.categoryId = c.id;
+  }
+
+  submit() {
+    this.stampService.create(this.stamp)
+     .subscribe(s => console.log(s));
   }
 
 }
