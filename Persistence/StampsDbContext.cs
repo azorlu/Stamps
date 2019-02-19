@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Stamps.Models;
+using Stamps.Core.Models;
 
 namespace Stamps.Persistence
 {

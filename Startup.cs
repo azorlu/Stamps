@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Stamps.Persistence;
+using Stamps.Core;
+using Stamps.Core.Models;
 
 namespace Stamps
 {

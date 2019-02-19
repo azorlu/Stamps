@@ -1,6 +1,6 @@
 using AutoMapper;
 using Stamps.Controllers.Resources;
-using Stamps.Models;
+using Stamps.Core.Models;
 
 namespace Stamps.Mapping
 {

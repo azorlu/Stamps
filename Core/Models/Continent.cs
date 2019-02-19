@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Stamps.Models
+namespace Stamps.Core.Models
 {
     [Table("Continents")]
     public class Continent

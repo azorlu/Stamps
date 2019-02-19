@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Stamps.Models;
+using Stamps.Core.Models;
 
-namespace Stamps.Persistence
+namespace Stamps.Core
 {
     public interface IStampRepository
     {

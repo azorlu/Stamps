@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Stamps.Models;
+using Stamps.Core;
+using Stamps.Core.Models;
 
 namespace Stamps.Persistence
 {

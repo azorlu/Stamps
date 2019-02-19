@@ -4,7 +4,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stamps.Controllers.Resources;
-using Stamps.Models;
+using Stamps.Core;
+using Stamps.Core.Models;
 using Stamps.Persistence;
 
 namespace Stamps.Controllers

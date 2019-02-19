@@ -4,8 +4,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stamps.Controllers.Resources;
-using Stamps.Models;
-using Stamps.Persistence;
+using Stamps.Core.Models;
+using Stamps.Core;
 
 namespace Stamps.Controllers
 {
@@ -58,6 +58,7 @@ namespace Stamps.Controllers
 
             await unitOfWork.CompleteAsync();
 
+            stamp = await repository.GetStampAsync(id);
             var result = mapper.Map<Stamp, StampResource>(stamp);
             return Ok(result);
         }

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Stamps.Core;
 
 namespace Stamps.Persistence
 {
