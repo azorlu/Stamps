@@ -10,22 +10,22 @@ using Stamps.Persistence;
 
 namespace Stamps.Controllers
 {
-
     public class ContinentsController : Controller
     {
-        private readonly StampsDbContext context;
         private readonly IMapper mapper;
-        public ContinentsController(StampsDbContext context, IMapper mapper)
+        private readonly IContinentRepository repository;
+
+        public ContinentsController(IMapper mapper, IContinentRepository repository)
         {
             this.mapper = mapper;
-            this.context = context;
+            this.repository = repository;
         }
 
         [HttpGet("/api/continents")]
         public async Task<IEnumerable<ContinentResource>> GetContinentsAsync() {
-            var continents = await context.Continents.Include(c => c.Countries).ToListAsync();
+            var continents = await repository.GetContinentsAsync();
 
-            return mapper.Map<List<Continent>, List<ContinentResource>>(continents);
+            return mapper.Map<IEnumerable<Continent>, List<ContinentResource>>(continents);
         }
     }
 }
