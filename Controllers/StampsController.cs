@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Stamps.Controllers.Resources;
 using Stamps.Models;
 using Stamps.Persistence;
@@ -11,52 +12,51 @@ namespace Stamps.Controllers
     [Route("/api/stamps")]
     public class StampsController : Controller
     {
-        private readonly StampsDbContext context;
         private readonly IMapper mapper;
+        private readonly IStampRepository repository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public StampsController(StampsDbContext context, IMapper mapper)
+        public StampsController(IMapper mapper, 
+            IStampRepository repository, IUnitOfWork unitOfWork)
         {
-            this.context = context;
             this.mapper = mapper;
+            this.repository = repository;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateStampAsync([FromBody] StampResource stampResource)
+        public async Task<IActionResult> CreateStampAsync([FromBody] SaveStampResource stampResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            /* var country = await context.Countries.FindAsync(stampResource.CountryId);
-            if (country == null)
-            {
-                ModelState.AddModelError("CountryId", "Invalid CountryId.");
-                return BadRequest(ModelState);
-            } */
-
-            var stamp = mapper.Map<StampResource, Stamp>(stampResource);
+            var stamp = mapper.Map<SaveStampResource, Stamp>(stampResource);
             stamp.LastUpdate = DateTime.Now;
 
-            context.Stamps.Add(stamp);
-            await context.SaveChangesAsync();
+            repository.Add(stamp);
+            await unitOfWork.CompleteAsync();
+
+            stamp = await repository.GetStampAsync(stamp.Id);
 
             var result = mapper.Map<Stamp, StampResource>(stamp);
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStampAsync(int id, [FromBody] StampResource stampResource)
+        public async Task<IActionResult> UpdateStampAsync(int id, [FromBody] SaveStampResource stampResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var stamp = await context.Stamps.FindAsync(id);
+            var stamp = await repository.GetStampAsync(id);
+
             if (stamp == null)
                 return NotFound();
 
-            mapper.Map<StampResource, Stamp>(stampResource, stamp);
+            mapper.Map<SaveStampResource, Stamp>(stampResource, stamp);
             stamp.LastUpdate = DateTime.Now;
 
-            await context.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
             var result = mapper.Map<Stamp, StampResource>(stamp);
             return Ok(result);
@@ -65,12 +65,13 @@ namespace Stamps.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStampAsync(int id)
         {
-            var stamp = await context.Stamps.FindAsync(id);
+            var stamp = await repository.GetStampAsync(id, includeRelated: false);
+
             if (stamp == null)
                 return NotFound();
 
-            context.Remove(stamp);
-            await context.SaveChangesAsync();
+            repository.Remove(stamp);
+            await unitOfWork.CompleteAsync();
 
             return Ok(id);
         }
@@ -78,8 +79,9 @@ namespace Stamps.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStampAsync(int id)
         {
-            var stamp = await context.Stamps.FindAsync(id);
-            if (stamp == null)
+            var stamp = await repository.GetStampAsync(id);
+           
+           if (stamp == null)
                 return NotFound();
 
             var result = mapper.Map<Stamp, StampResource>(stamp);

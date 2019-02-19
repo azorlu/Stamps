@@ -21,10 +21,10 @@ namespace Stamps.Controllers
         }
 
         [HttpGet("/api/categories")]
-        public async Task<IEnumerable<CategoryResource>> GetCategoriesAsync() {
+        public async Task<IEnumerable<KeyValuePairResource>> GetCategoriesAsync() {
             var categories = await context.Categories.ToListAsync();
 
-            return mapper.Map<List<Category>, List<CategoryResource>>(categories);
+            return mapper.Map<List<Category>, List<KeyValuePairResource>>(categories);
         }
     }
 }

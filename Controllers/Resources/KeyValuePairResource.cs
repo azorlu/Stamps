@@ -1,9 +1,9 @@
 namespace Stamps.Controllers.Resources
 {
-    public class CategoryResource
+    public class KeyValuePairResource
     {
         public int Id { get; set; } 
         
-        public string Name { get; set; }
+        public string Name { get; set; }  
     }
 }
