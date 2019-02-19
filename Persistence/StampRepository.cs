@@ -13,6 +13,7 @@ namespace Stamps.Persistence
         {
             this.context = context;
         }
+        
         public async Task<Stamp> GetStampAsync(int id, bool includeRelated = true)
         {
             if (!includeRelated)
