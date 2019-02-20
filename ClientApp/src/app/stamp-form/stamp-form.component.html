@@ -1,6 +1,12 @@
-<h3>
-  New Stamp
-</h3>
+<header>
+<ng-template [ngIf]="loadStamp" [ngIfElse]="newStamp">
+  <h4>Update Stamp</h4>
+ </ng-template>
+ 
+ <ng-template #newStamp>
+  <h4>Add New Stamp</h4>
+ </ng-template>
+</header>
 <p>
   {{ stamp | json }}
 </p>
@@ -38,7 +44,7 @@
   </div>
   <div class="form-group">
     <label for="Year">Year</label>
-    <input id="Year" type="number" min="1800" max="{{ currentYear }}" 
+    <input id="Year" type="number" min="1800" max="{{ currentYear }}"
     pattern="^(18|19|20)\d{2}$"
     class="form-control" [(ngModel)]="stamp.yearIssued" name="yearIssued" required #year="ngModel">
       <div class="alert alert-danger" *ngIf="year.touched && !year.valid">
@@ -57,5 +63,23 @@
     <label for="Description">Description</label>
     <input id="Description" type="text" class="form-control" [(ngModel)]="stamp.description" name="description">
   </div>
-  <button class="btn btn-primary" [disabled]="!frm.valid">Save</button>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <button class="btn btn-primary" [disabled]="!frm.valid">Save</button>
+      </div>
+      <div class="col-sm">
+        
+      </div>
+      <div class="col-sm">
+        <button *ngIf="loadStamp" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+      </div>
+    </div>
+  </div>
+
 </form>
+
+<footer>
+  <p></p>
+</footer>

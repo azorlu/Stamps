@@ -1,3 +1,4 @@
+import { SaveStamp } from './../models/saveStamp';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -18,5 +19,17 @@ export class StampService {
 
   create(stamp) {
     return this.httpClient.post('/api/stamps', stamp);
+  }
+
+  load(id) {
+    return this.httpClient.get('/api/stamps/' + id);
+  }
+
+  update(stamp: SaveStamp) {
+    return this.httpClient.put('/api/stamps/' + stamp.id, stamp);
+  }
+
+  delete(id) {
+    return this.httpClient.delete('api/stamps/' + id);
   }
 }
