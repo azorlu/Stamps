@@ -11,24 +11,24 @@ export class StampFormComponent implements OnInit {
   continents;
   countries;
   categories;
-  currentYear:number;
-  title:string;
-  description:string;
-  stamp: any= {};
-  
-  constructor(private stampService: StampService) { 
-      
-    }
+  currentYear: number;
+  title: string;
+  description: string;
+  stamp: any = {};
+
+  constructor(private stampService: StampService) {
+
+  }
 
   ngOnInit() {
     this.currentYear = new Date().getFullYear();
-    
+
     this.stampService.getContinents()
       .subscribe(continents => {
         this.continents = continents;
       });
 
-      this.stampService.getCategories()
+    this.stampService.getCategories()
       .subscribe(categories => {
         this.categories = categories;
       });
@@ -40,13 +40,9 @@ export class StampFormComponent implements OnInit {
     delete this.stamp.countryId;
   }
 
-  onCategoryChange(c) {
-    this.stamp.categoryId = c.id;
-  }
-
   submit() {
     this.stampService.create(this.stamp)
-     .subscribe(s => console.log(s));
+      .subscribe(s => console.log(s));
   }
 
 }
