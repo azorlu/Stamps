@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Stamps.Controllers.Resources;
 using Stamps.Core.Models;
 using Stamps.Core;
+using System.Collections.Generic;
 
 namespace Stamps.Controllers
 {
@@ -88,5 +89,16 @@ namespace Stamps.Controllers
             var result = mapper.Map<Stamp, StampResource>(stamp);
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<IEnumerable<StampResource>> GetStampsAsync(FilterResource filterResource) 
+        {
+            var filter = mapper.Map<FilterResource, Filter>(filterResource);
+            var stamps = await repository.GetStampsAsync(filter);
+            var result = mapper.Map<IEnumerable<Stamp>, IEnumerable<StampResource>>(stamps);
+
+            return result;
+        }
+
     }
 }

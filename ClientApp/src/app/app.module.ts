@@ -10,15 +10,18 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { StampFormComponent } from './stamp-form/stamp-form.component';
+import { StampListComponent } from './stamp-list/stamp-list.component';
 
 import { StampService } from './services/stamp.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    StampFormComponent
+    StampFormComponent,
+    StampListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -27,7 +30,8 @@ import { StampService } from './services/stamp.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'stamps/new', component: StampFormComponent },
-      { path: 'stamps/:id', component: StampFormComponent }
+      { path: 'stamps/:id', component: StampFormComponent },
+      { path: 'stamps', component: StampListComponent }
     ])
   ],
   providers: [

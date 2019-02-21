@@ -1,0 +1,42 @@
+<header>
+  <p>Search Stamps</p>
+  <p><a [routerLink]="['/stamps/new']" class="btn btn-primary">
+      Add Stamp
+    </a>
+  </p>
+</header>
+<div class="card card-body bg-light">
+<div class="form-group">
+  <label for="continent">Continent</label>
+  <select name="" id="continent" class="form-control" 
+  [(ngModel)]="filter.continentId" (change)="onFilterChange()">
+      <option value=""></option>
+      <option *ngFor="let c of continents" value="{{ c.id }}">{{ c.name }}</option>
+  </select>
+</div>
+<button class="btn btn-default" (click)="resetFilter()">Reset</button>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Description</td>
+      <td>Category</td>
+      <td>Continent</td>
+      <td>Country</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of stamps">
+      <td>{{ s.id }}</td>
+      <td>{{ s.description }}</td>
+      <td>{{ s.category.name }}</td>
+      <td>{{ s.continent.name }}</td>
+      <td>{{ s.country.name }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<footer>
+  <p></p>
+</footer>

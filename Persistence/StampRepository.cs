@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Stamps.Core;
@@ -13,7 +15,7 @@ namespace Stamps.Persistence
         {
             this.context = context;
         }
-        
+
         public async Task<Stamp> GetStampAsync(int id, bool includeRelated = true)
         {
             if (!includeRelated)
@@ -26,6 +28,22 @@ namespace Stamps.Persistence
                 .SingleOrDefaultAsync(s => s.Id == id);
         }
 
+        public async Task<IEnumerable<Stamp>> GetStampsAsync(Filter filter)
+        {
+            var query = context.Stamps
+                .Include(s => s.Country)
+                  .ThenInclude(c => c.Continent)
+                .Include(s => s.Category)
+                .AsQueryable();
+            
+            if (filter.ContinentId.HasValue) {
+                query = query.Where(s => s.Country.ContinentId == filter.ContinentId.Value);
+            }
+            
+            return await query.ToListAsync();
+
+        }
+
         public void Add(Stamp stamp)
         {
             context.Stamps.Add(stamp);
@@ -35,5 +53,7 @@ namespace Stamps.Persistence
         {
             context.Stamps.Remove(stamp);
         }
+
+
     }
 }
