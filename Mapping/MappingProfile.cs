@@ -11,6 +11,7 @@ namespace Stamps.Mapping
             // Domain -> API Resource
             CreateMap<Continent, ContinentResource>();
             CreateMap<Continent, KeyValuePairResource>();
+            CreateMap<Country, CountryResource>();
             CreateMap<Country, KeyValuePairResource>();
             CreateMap<Category, KeyValuePairResource>();
             CreateMap<Stamp, SaveStampResource>();

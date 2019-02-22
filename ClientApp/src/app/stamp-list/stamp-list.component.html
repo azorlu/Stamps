@@ -6,16 +6,40 @@
   </p>
 </header>
 <div class="card card-body bg-light">
-<div class="form-group">
-  <label for="continent">Continent</label>
-  <select name="" id="continent" class="form-control" 
-  [(ngModel)]="filter.continentId" (change)="onFilterChange()">
+  <div class="form-group">
+    <label for="continent">Continent</label>
+    <select name="" id="continent" class="form-control" [(ngModel)]="filter.continentId" (change)="onContinentChange()">
       <option value=""></option>
       <option *ngFor="let c of continents" value="{{ c.id }}">{{ c.name }}</option>
-  </select>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="country">Country</label>
+    <select name="" id="country" class="form-control" [(ngModel)]="filter.countryId" (change)="onCountryChange()">
+      <option value=""></option>
+      <option *ngFor="let c of countries" value="{{ c.id }}">{{ c.name }}</option>
+    </select>
+  </div>
 </div>
-<button class="btn btn-default" (click)="resetFilter()">Reset</button>
+
+<div class="card card-body bg-light">
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <button class="btn btn-primary" (click)=onFilterChange()>Search</button>
+    </div>
+    <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
+      <button class="btn btn-danger" (click)="resetFilter()">Reset</button>
+    </div>
+  </div>
 </div>
+</div>
+
+<div class="card card-body bg-light">
 <table class="table">
   <thead>
     <tr>
@@ -24,6 +48,7 @@
       <td>Category</td>
       <td>Continent</td>
       <td>Country</td>
+      <td>View</td>
     </tr>
   </thead>
   <tbody>
@@ -33,9 +58,11 @@
       <td>{{ s.category.name }}</td>
       <td>{{ s.continent.name }}</td>
       <td>{{ s.country.name }}</td>
+      <td><a [routerLink]="['/stamps/', s.id]">View</a> </td>
     </tr>
   </tbody>
 </table>
+</div>
 
 <footer>
   <p></p>

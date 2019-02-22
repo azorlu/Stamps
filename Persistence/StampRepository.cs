@@ -39,6 +39,10 @@ namespace Stamps.Persistence
             if (filter.ContinentId.HasValue) {
                 query = query.Where(s => s.Country.ContinentId == filter.ContinentId.Value);
             }
+
+            if(filter.CountryId.HasValue) {
+                query = query.Where(s => s.Country.Id == filter.CountryId.Value);
+            }
             
             return await query.ToListAsync();
 

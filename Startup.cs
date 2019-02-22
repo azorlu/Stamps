@@ -29,6 +29,7 @@ namespace Stamps
             services.AddScoped<IStampRepository, StampRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IContinentRepository, ContinentRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             
             services.AddAutoMapper();

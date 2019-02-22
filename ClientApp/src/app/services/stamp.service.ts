@@ -15,6 +15,10 @@ export class StampService {
     return this.httpClient.get('/api/continents');
   }
 
+  getCountries() {
+    return this.httpClient.get('/api/countries');
+  }
+
   getCategories() {
     return this.httpClient.get('/api/categories');
   }
