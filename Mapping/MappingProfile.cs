@@ -19,7 +19,7 @@ namespace Stamps.Mapping
             .ForMember(sr => sr.Continent, opt => opt.MapFrom(s => s.Country.Continent));
 
             // API Resource -> Domain
-            CreateMap<FilterResource, Filter>();
+            CreateMap<StampQueryResource, StampQuery>();
             CreateMap<SaveStampResource, Stamp>()
             .ForMember(s => s.Id, opt => opt.Ignore())
             .ForMember(s => s.LastUpdate, opt => opt.Ignore());

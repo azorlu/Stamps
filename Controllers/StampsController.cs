@@ -91,9 +91,9 @@ namespace Stamps.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<StampResource>> GetStampsAsync(FilterResource filterResource) 
+        public async Task<IEnumerable<StampResource>> GetStampsAsync(StampQueryResource filterResource) 
         {
-            var filter = mapper.Map<FilterResource, Filter>(filterResource);
+            var filter = mapper.Map<StampQueryResource, StampQuery>(filterResource);
             var stamps = await repository.GetStampsAsync(filter);
             var result = mapper.Map<IEnumerable<Stamp>, IEnumerable<StampResource>>(stamps);
 

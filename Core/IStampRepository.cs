@@ -9,6 +9,6 @@ namespace Stamps.Core
         Task<Stamp> GetStampAsync(int id, bool includeRelated = true);
         void Add(Stamp stamp);
         void Remove(Stamp stamp);
-        Task<IEnumerable<Stamp>> GetStampsAsync(Filter filter);
+        Task<IEnumerable<Stamp>> GetStampsAsync(StampQuery filter);
     }
 }
