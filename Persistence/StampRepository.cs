@@ -49,14 +49,18 @@ namespace Stamps.Persistence
                 query = query.Where(s => s.Country.Id == queryObj.CountryId.Value);
             }
 
+            // ToDo :: needs refactoring
             var columnsMap = new Dictionary<string, Expression<Func<Stamp, object>>>()
             {
                 ["continent"] = v => v.Country.Continent.Name,
                 ["country"] = v => v.Country.Name,
+                ["category"] = v => v.Category.Name,
                 ["title"] = v => v.Title
             };
 
             query = query.ApplyOrdering(queryObj, columnsMap);
+
+            query = query.ApplyPaging(queryObj);
 
             return await query.ToListAsync();
 

@@ -1,5 +1,5 @@
 <header>
-  <p>Search Stamps</p>
+  <p>  <fa-icon [icon]="faSearch"></fa-icon> Search Stamps</p>
   <p><a [routerLink]="['/stamps/new']" class="btn btn-primary">
       Add Stamp
     </a>
@@ -8,7 +8,7 @@
 <div class="card card-body bg-light">
   <div class="form-group">
     <label for="continent">Continent</label>
-    <select name="" id="continent" class="form-control" [(ngModel)]="filter.continentId" (change)="onContinentChange()">
+    <select name="" id="continent" class="form-control" [(ngModel)]="query.continentId" (change)="onContinentChange()">
       <option value=""></option>
       <option *ngFor="let c of continents" value="{{ c.id }}">{{ c.name }}</option>
     </select>
@@ -16,7 +16,7 @@
 
   <div class="form-group">
     <label for="country">Country</label>
-    <select name="" id="country" class="form-control" [(ngModel)]="filter.countryId" (change)="onCountryChange()">
+    <select name="" id="country" class="form-control" [(ngModel)]="query.countryId" (change)="onCountryChange()">
       <option value=""></option>
       <option *ngFor="let c of countries" value="{{ c.id }}">{{ c.name }}</option>
     </select>
@@ -27,13 +27,13 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <button class="btn btn-primary" (click)=onFilterChange()>Search</button>
+      <button class="btn btn-primary" (click)=onQueryChange()>Search</button>
     </div>
     <div class="col-sm">
 
     </div>
     <div class="col-sm">
-      <button class="btn btn-danger" (click)="resetFilter()">Reset</button>
+      <button class="btn btn-danger" (click)="resetQuery()">Reset</button>
     </div>
   </div>
 </div>
@@ -43,18 +43,21 @@
 <table class="table">
   <thead>
     <tr>
-      <td>ID</td>
-      <td>Description</td>
-      <td>Category</td>
-      <td>Continent</td>
-      <td>Country</td>
-      <td>View</td>
+      <th *ngFor="let c of columns">
+      <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
+        {{ c.title }}
+        <fa-icon *ngIf="query.sortBy === c.key" [icon]="query.isSortAscending? faSortUp : faSortDown"></fa-icon>
+      </div>
+      <div *ngIf="!c.isSortable">
+        {{ c.title }}
+      </div>
+    </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let s of stamps">
       <td>{{ s.id }}</td>
-      <td>{{ s.description }}</td>
+      <td>{{ s.title }}</td>
       <td>{{ s.category.name }}</td>
       <td>{{ s.continent.name }}</td>
       <td>{{ s.country.name }}</td>

@@ -2,6 +2,7 @@ import { KeyValuePair } from './../models/keyValuePair';
 import { StampService } from './../services/stamp.service';
 import { Component, OnInit } from '@angular/core';
 import { Stamp } from '../models/stamp';
+import { faSearch, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-stamp-list',
@@ -9,12 +10,25 @@ import { Stamp } from '../models/stamp';
   styleUrls: ['./stamp-list.component.css']
 })
 export class StampListComponent implements OnInit {
+  faSearch = faSearch;
+  faSortUp = faSortUp;
+  faSortDown = faSortDown;
+
   stamps: Stamp[];
   continents: KeyValuePair[];
   countries: KeyValuePair[];
-  filter:any = {};
+  query:any = {};
   selectedContinentId: number;
   selectedCountryId: number;
+
+  columns = [
+    { title: 'Id' },
+    { title: 'Title', key: 'title', isSortable: true },
+    { title: 'Category', key: 'category', isSortable: true },
+    { title: 'Continent', key: 'continent', isSortable: true }, 
+    { title: 'Country', key: 'country', isSortable: true },
+    { title: 'View' }
+  ];
 
   constructor(private stampService: StampService) { }
 
@@ -31,40 +45,49 @@ export class StampListComponent implements OnInit {
   }
 
   loadStamps() {
-    this.stampService.loadAll(this.filter).subscribe(
+    this.stampService.loadAll(this.query).subscribe(
       sList => this.stamps = <Stamp[]>sList
     );
   }
 
-  onFilterChange() {
+  onQueryChange() {
     this.loadStamps();
   }
 
-  resetFilter() {
-    this.filter = {};
+  resetQuery() {
+    this.query = {};
     this.onContinentChange();
-    this.onFilterChange();
+    this.onQueryChange();
   }
 
   onContinentChange() {
-    this.selectedContinentId = this.filter.continentId;
+    this.selectedContinentId = this.query.continentId;
     this.bindCountries();
   }
 
   onCountryChange() {
-    this.selectedCountryId = this.filter.countryId;
+    this.selectedCountryId = this.query.countryId;
     this.bindContinents();
   }
 
   private bindCountries() {
     var selectedContinent: any = this.continents.find(c => c.id == this.selectedContinentId);
     this.countries = selectedContinent ? selectedContinent.countries : [];
-    delete this.filter.countryId;
+    delete this.query.countryId;
   }
 
   private bindContinents() {
     var selectedCountry: any = this.countries.find(c => c.id == this.selectedCountryId);
-    //this.selectedContinentId = selectedCountry ? selectedCountry.continentId : 0;
+  }
+
+  sortBy(columnName) {
+    if (this.query.sortBy === columnName) {
+      this.query.isSortAscending = !this.query.isSortAscending;
+    } else {
+      this.query.sortBy = columnName;
+      this.query.isSortAscending = true;
+    }
+    this.loadStamps();
   }
 
 }
