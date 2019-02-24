@@ -86,15 +86,19 @@ export class StampFormComponent implements OnInit {
     this.countries = selectedContinent ? selectedContinent.countries : [];
   }
 
+  private backToSearch() {
+    this.router.navigate(['/stamps']);
+  }
+
   submit() {
     if (this.loadStamp) {
       this.stampService.update(this.stamp)
-        .subscribe(s => console.log(s)
+        .subscribe(s => this.backToSearch()
         );
     } else {
       this.stamp.id = 0; // if id is NaN BAD REQUEST error occurs
       this.stampService.create(this.stamp)
-        .subscribe(s => console.log(s)
+        .subscribe(s => this.backToSearch()
         );
     }
   }

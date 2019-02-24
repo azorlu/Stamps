@@ -31,8 +31,10 @@ namespace Stamps.Persistence
                 .SingleOrDefaultAsync(s => s.Id == id);
         }
 
-        public async Task<IEnumerable<Stamp>> GetStampsAsync(StampQuery queryObj)
+        public async Task<QueryResult<Stamp>> GetStampsAsync(StampQuery queryObj)
         {
+            var result = new QueryResult<Stamp>();
+
             var query = context.Stamps
                 .Include(s => s.Country)
                   .ThenInclude(c => c.Continent)
@@ -60,9 +62,13 @@ namespace Stamps.Persistence
 
             query = query.ApplyOrdering(queryObj, columnsMap);
 
+            result.TotalItems = await query.CountAsync();
+
             query = query.ApplyPaging(queryObj);
 
-            return await query.ToListAsync();
+            result.Items = await query.ToListAsync();
+
+            return result;
 
         }
 

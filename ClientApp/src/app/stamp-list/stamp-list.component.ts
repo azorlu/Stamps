@@ -14,10 +14,12 @@ export class StampListComponent implements OnInit {
   faSortUp = faSortUp;
   faSortDown = faSortDown;
 
-  stamps: Stamp[];
+  queryResult:any = {};
   continents: KeyValuePair[];
   countries: KeyValuePair[];
-  query:any = {};
+  query:any = {
+    pageSize:3
+  };
   selectedContinentId: number;
   selectedCountryId: number;
 
@@ -34,11 +36,11 @@ export class StampListComponent implements OnInit {
 
   ngOnInit() {
     this.stampService.getContinents().subscribe(
-      cList => this.continents = <KeyValuePair[]>cList
+      c => this.continents = <KeyValuePair[]>c
     );
 
     this.stampService.getCountries().subscribe(
-      cList => this.countries = <KeyValuePair[]>cList
+      c => this.countries = <KeyValuePair[]>c
     );
 
     this.loadStamps();
@@ -46,7 +48,7 @@ export class StampListComponent implements OnInit {
 
   loadStamps() {
     this.stampService.loadAll(this.query).subscribe(
-      sList => this.stamps = <Stamp[]>sList
+      result => this.queryResult = result
     );
   }
 
@@ -87,6 +89,11 @@ export class StampListComponent implements OnInit {
       this.query.sortBy = columnName;
       this.query.isSortAscending = true;
     }
+    this.loadStamps();
+  }
+
+  onPageChange(page) {
+    this.query.page = page;
     this.loadStamps();
   }
 

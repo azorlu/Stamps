@@ -55,7 +55,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let s of stamps">
+    <tr *ngFor="let s of queryResult.items">
       <td>{{ s.id }}</td>
       <td>{{ s.title }}</td>
       <td>{{ s.category.name }}</td>
@@ -65,6 +65,12 @@
     </tr>
   </tbody>
 </table>
+</div>
+
+
+<div class="card card-body bg-light">
+  <app-pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" 
+  (page-changed)="onPageChange($event)"></app-pagination>
 </div>
 
 <footer>

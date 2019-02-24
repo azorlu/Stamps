@@ -1,7 +1,6 @@
-import { AppErrorHandler } from './app.error-handler';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
+import { AppErrorHandler } from './app.error-handler';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -12,6 +11,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { StampFormComponent } from './stamp-form/stamp-form.component';
 import { StampListComponent } from './stamp-list/stamp-list.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 import { StampService } from './services/stamp.service';
 
@@ -22,7 +22,8 @@ import { StampService } from './services/stamp.service';
     NavMenuComponent,
     HomeComponent,
     StampFormComponent,
-    StampListComponent
+    StampListComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
