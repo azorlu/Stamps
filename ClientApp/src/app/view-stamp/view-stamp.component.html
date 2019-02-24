@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
+          aria-selected="true">Stamp Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos"
+          aria-selected="false">Stamp Photos</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body" *ngIf="stamp">
+    <div class="tab-content" id="tabContent">
+      <div id="info" class="tab-pane fade show active" role="tabpanel" aria-labelledby="info-tab">
+        <h2>Stamp Info</h2>
+        <ul>
+          <li>Continent: {{ stamp.continent.name }}</li>
+          <li>Country: {{ stamp.country.name }}</li>
+          <li>Category: {{ stamp.category.name }}</li>
+          <li>Year: {{ stamp.yearIssued }}</li>
+          <li>Title: {{ stamp.title }}</li>
+          <li>Description: {{ stamp.description }}</li>
+        </ul>
+      </div>
+
+      <div id="photos" class="tab-pane fade" role="tabpanel" aria-labelledby="photos-tab">
+        <h2>Stamp Photos</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <button class="btn btn-primary" [routerLink]="['/stamps/edit/', stamp.id]">Edit</button>
+
+  <button class="btn btn-default" [routerLink]="['/stamps']">View All</button>
+
+  <button class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+</div>

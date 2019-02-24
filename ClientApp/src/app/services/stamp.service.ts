@@ -23,7 +23,7 @@ export class StampService {
     return this.httpClient.get('/api/categories');
   }
 
-  create(stamp) {
+  create(stamp: SaveStamp) {
     return this.httpClient.post(this.stampsEndpoint, stamp);
   }
 

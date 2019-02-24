@@ -35,7 +35,7 @@ export class StampFormComponent implements OnInit {
     private router: Router,
     private stampService: StampService) {
     route.params.subscribe(p => {
-      this.stamp.id = +p['id']; // add + to convert value to number
+      this.stamp.id = +p['id'] || 0; // add + to convert value to number
     })
   }
 
@@ -86,21 +86,14 @@ export class StampFormComponent implements OnInit {
     this.countries = selectedContinent ? selectedContinent.countries : [];
   }
 
-  private backToSearch() {
-    this.router.navigate(['/stamps']);
+  private backToView() {
+    this.router.navigate(['/stamps', this.stamp.id]);
   }
 
   submit() {
-    if (this.loadStamp) {
-      this.stampService.update(this.stamp)
-        .subscribe(s => this.backToSearch()
-        );
-    } else {
-      this.stamp.id = 0; // if id is NaN BAD REQUEST error occurs
-      this.stampService.create(this.stamp)
-        .subscribe(s => this.backToSearch()
-        );
-    }
+    var result$ = this.loadStamp ? this.stampService.update(this.stamp)
+      : this.stampService.create(this.stamp);
+    result$.subscribe(s => this.backToView());
   }
 
   delete() {

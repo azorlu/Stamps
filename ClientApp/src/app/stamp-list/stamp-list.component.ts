@@ -10,6 +10,8 @@ import { faSearch, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icon
   styleUrls: ['./stamp-list.component.css']
 })
 export class StampListComponent implements OnInit {
+  private readonly PAGE_SIZE = 3;
+
   faSearch = faSearch;
   faSortUp = faSortUp;
   faSortDown = faSortDown;
@@ -18,7 +20,7 @@ export class StampListComponent implements OnInit {
   continents: KeyValuePair[];
   countries: KeyValuePair[];
   query:any = {
-    pageSize:3
+    pageSize: this.PAGE_SIZE
   };
   selectedContinentId: number;
   selectedCountryId: number;
@@ -53,13 +55,18 @@ export class StampListComponent implements OnInit {
   }
 
   onQueryChange() {
+    this.query.page = 1;
     this.loadStamps();
   }
 
   resetQuery() {
-    this.query = {};
+    this.query = {
+      page: 1,
+      pageSize: this.PAGE_SIZE
+    };
     this.onContinentChange();
-    this.onQueryChange();
+    //this.onQueryChange();
+    this.loadStamps();
   }
 
   onContinentChange() {

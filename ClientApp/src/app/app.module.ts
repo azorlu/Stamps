@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error-handler';
@@ -12,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { StampFormComponent } from './stamp-form/stamp-form.component';
 import { StampListComponent } from './stamp-list/stamp-list.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import { ViewStampComponent } from './view-stamp/view-stamp.component';
 
 import { StampService } from './services/stamp.service';
 
@@ -23,7 +25,8 @@ import { StampService } from './services/stamp.service';
     HomeComponent,
     StampFormComponent,
     StampListComponent,
-    PaginationComponent
+    PaginationComponent,
+    ViewStampComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,7 +36,8 @@ import { StampService } from './services/stamp.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'stamps/new', component: StampFormComponent },
-      { path: 'stamps/:id', component: StampFormComponent },
+      { path: 'stamps/edit/:id', component: StampFormComponent },
+      { path: 'stamps/:id', component: ViewStampComponent },
       { path: 'stamps', component: StampListComponent }
     ])
   ],

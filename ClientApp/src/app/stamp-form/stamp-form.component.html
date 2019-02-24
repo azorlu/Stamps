@@ -2,14 +2,10 @@
 <ng-template [ngIf]="loadStamp" [ngIfElse]="newStamp">
   <h4>Update Stamp</h4>
  </ng-template>
- 
  <ng-template #newStamp>
   <h4>Add New Stamp</h4>
  </ng-template>
 </header>
-<p>
-  {{ stamp | json }}
-</p>
 <form (ngSubmit)="submit()" #frm="ngForm">
   <div class="form-group">
     <label for="continent">Continent</label>
@@ -63,7 +59,6 @@
     <label for="Description">Description</label>
     <input id="Description" type="text" class="form-control" [(ngModel)]="stamp.description" name="description">
   </div>
-  
   <div class="container">
     <div class="row">
       <div class="col-sm">
@@ -77,9 +72,7 @@
       </div>
     </div>
   </div>
-
 </form>
-
 <footer>
   <p></p>
 </footer>
