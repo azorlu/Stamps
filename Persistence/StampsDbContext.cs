@@ -13,6 +13,8 @@ namespace Stamps.Persistence
 
         public DbSet<Stamp> Stamps { get; set; }
 
+        public DbSet<Photo> Photos { get; set; }
+
         public StampsDbContext(DbContextOptions<StampsDbContext> options)
         : base(options)
         {

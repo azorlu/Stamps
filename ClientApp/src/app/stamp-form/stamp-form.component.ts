@@ -2,7 +2,6 @@ import { SaveStamp } from './../models/saveStamp';
 import { StampService } from '../services/stamp.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { forkJoin } from 'rxjs';
 import { Stamp } from '../models/stamp';
 
@@ -87,7 +86,11 @@ export class StampFormComponent implements OnInit {
   }
 
   private backToView() {
+    if (this.stamp.id > 0) {
     this.router.navigate(['/stamps', this.stamp.id]);
+    } else {
+      this.router.navigate(['/stamps']);
+    }
   }
 
   submit() {

@@ -31,6 +31,8 @@ namespace Stamps
             services.AddScoped<IContinentRepository, ContinentRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
             
             services.AddAutoMapper();
             

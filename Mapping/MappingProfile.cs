@@ -9,6 +9,7 @@ namespace Stamps.Mapping
         public MappingProfile()
         {
             // Domain -> API Resource
+            CreateMap<Photo, PhotoResource>();
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Continent, ContinentResource>();
             CreateMap<Continent, KeyValuePairResource>();
