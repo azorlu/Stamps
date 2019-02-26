@@ -11,6 +11,7 @@ using AutoMapper;
 using Stamps.Controllers.Resources;
 using System.Linq;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 
 namespace Stamps.Controllers
 {
@@ -20,11 +21,13 @@ namespace Stamps.Controllers
         private readonly IHostingEnvironment host;
         private readonly PhotoSettings photoSettings;
         private readonly IStampRepository repository;
+        private readonly IPhotoRepository photoRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
         public PhotosController(IHostingEnvironment host,
           IStampRepository repository,
+          IPhotoRepository photoRepository,
           IUnitOfWork unitOfWork,
           IMapper mapper,
           IOptionsSnapshot<PhotoSettings> options)
@@ -32,6 +35,7 @@ namespace Stamps.Controllers
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
             this.repository = repository;
+            this.photoRepository = photoRepository;
             this.host = host;
             this.photoSettings = options.Value;
         }
@@ -77,6 +81,13 @@ namespace Stamps.Controllers
 
             return Ok(mapper.Map<Photo, PhotoResource>(photo));
 
+        }
+
+        [HttpGet()]
+        public async Task<IEnumerable<PhotoResource>> GetPhotosAsync(int stampId) {
+            var photos = await photoRepository.GetPhotosAsync(stampId);
+
+            return mapper.Map<IEnumerable<Photo>, List<PhotoResource>>(photos);
         }
 
     }

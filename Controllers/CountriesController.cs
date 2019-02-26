@@ -23,9 +23,9 @@ namespace Stamps.Controllers
 
         [HttpGet("/api/Countries")]
         public async Task<IEnumerable<CountryResource>> GetCountriesAsync() {
-            var Countries = await repository.GetCountriesAsync();
+            var countries = await repository.GetCountriesAsync();
 
-            return mapper.Map<IEnumerable<Country>, List<CountryResource>>(Countries);
+            return mapper.Map<IEnumerable<Country>, List<CountryResource>>(countries);
         }
     }
 }

@@ -28,6 +28,10 @@
 
       <div id="photos" class="tab-pane fade" role="tabpanel" aria-labelledby="photos-tab">
         <h2>Stamp Photos</h2>
+        <input type="file" (change)="uploadPhoto()" #fileInput>
+        <br />
+        <img *ngFor="let photo of photos" 
+        src="/uploads/{{ photo.fileName }}" class="img-thumbnail">
       </div>
     </div>
   </div>

@@ -27,6 +27,7 @@ namespace Stamps
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStampRepository, StampRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IContinentRepository, ContinentRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();

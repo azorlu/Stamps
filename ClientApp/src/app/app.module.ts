@@ -16,6 +16,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
 import { ViewStampComponent } from './view-stamp/view-stamp.component';
 
 import { StampService } from './services/stamp.service';
+import { PhotoService } from './services/photo.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { StampService } from './services/stamp.service';
   ],
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler},
-    StampService
+    StampService,
+    PhotoService
   ],
   bootstrap: [AppComponent]
 })
