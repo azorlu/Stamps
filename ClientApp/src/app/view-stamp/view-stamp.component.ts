@@ -57,8 +57,10 @@ export class ViewStampComponent implements OnInit {
 
   uploadPhoto() {
     var elem: HTMLInputElement = this.fileInput.nativeElement;
+    var file = elem.files[0];
+    elem.value = '';
 
-    this.photoService.upload(this.stampId, elem.files[0])
+    this.photoService.upload(this.stampId, file)
       .subscribe(p => {
         this.photos.push(p);
       });

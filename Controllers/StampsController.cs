@@ -7,6 +7,7 @@ using Stamps.Controllers.Resources;
 using Stamps.Core.Models;
 using Stamps.Core;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Stamps.Controllers
 {
@@ -26,6 +27,7 @@ namespace Stamps.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateStampAsync([FromBody] SaveStampResource stampResource)
         {
             if (!ModelState.IsValid)
@@ -44,6 +46,7 @@ namespace Stamps.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateStampAsync(int id, [FromBody] SaveStampResource stampResource)
         {
             if (!ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace Stamps.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteStampAsync(int id)
         {
             var stamp = await repository.GetStampAsync(id, includeRelated: false);

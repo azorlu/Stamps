@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error-handler';
@@ -14,10 +13,11 @@ import { StampFormComponent } from './stamp-form/stamp-form.component';
 import { StampListComponent } from './stamp-list/stamp-list.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { ViewStampComponent } from './view-stamp/view-stamp.component';
+import { CallbackComponent } from './callback/callback.component';
 
 import { StampService } from './services/stamp.service';
 import { PhotoService } from './services/photo.service';
-
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { PhotoService } from './services/photo.service';
     StampFormComponent,
     StampListComponent,
     PaginationComponent,
-    ViewStampComponent
+    ViewStampComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,7 +46,8 @@ import { PhotoService } from './services/photo.service';
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler},
     StampService,
-    PhotoService
+    PhotoService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
